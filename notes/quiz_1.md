@@ -47,7 +47,7 @@ We want `O(1)` but we tend to get `O(1) + n`
 ### Linear
 ```
 k = 1
-(x % Ts + i^k) % Ts where k = 1
+(x % Ts + i^k) % Ts
 ```
 
 ### Quadratic
@@ -60,6 +60,12 @@ k = 2
 ```
 R = Prime smaller than Ts
 x % Ts + i(R - x % R) % Ts
+```
+
+```ruby
+t =
+r =
+x = 69; (x % t + 0 * (r - x % r)) % t
 ```
 
 ### Searching
