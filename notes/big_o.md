@@ -25,7 +25,7 @@ for(int i = 0; i < N; i++) {
 
 The value of c is N
 
-```
+```c++
 // N > 0
 // Two levels of nesting
 int c = 0;
@@ -49,9 +49,9 @@ for(int i = 0; i < N; i++) {
 }
 ```
 
-```
+```ruby
 k = 0 -> N – 1
-Sum = N + (N – 1) + (N – 2) + ... = ½ * (N+1)*(N) = ½ * (N2 – N)
+Sum = N + (N - 1) + (N - 2) + ... = 0.5 * (N + 1) * (N) = 0.5 * (N^2 - N)
 ```
 
 ### Loops increase `T`
@@ -77,13 +77,13 @@ When we say `f(N) = O(g(N))`, we are saying the Big-O of `f(n)` is `g(N)`.
 ```
 O (Big-O):    O means <=
 o (Little O): o means <
-Ω (Omega):    Ω means >=
+Ω (Omega):    Ω means >=
 Θ (Theta):    Θ means ==
 ```
 
 * `f(N) = O(g(N))`: `f(N) <= *` the growth rate of `g(N)`.
 * `f(N) = o(g(N))`: `f(N) <  *` the growth rate of `g(N)`.
-* `f(N) = Ω(g(N))`: `f(N) >= *` the growth rate of `g(N)`.
+* `f(N) = Ω(g(N))`: `f(N) >= *` the growth rate of `g(N)`.
 * `f(N) = Θ(g(N))`: `f(N) =  *` the growth rate of `g(N)`.
 
 **The values of `g(N)` vs `f(N)` don’t matter**, it is the growth rate. `g(N)` could be growing faster but have a smaller value that `f(N)` at a particular `N`, but you can just multiply `g(N)` by a constant, then it’s value will always be greater than `f(N)` from `N >= n0` and beyond as N -> infinity.
