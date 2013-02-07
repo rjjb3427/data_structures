@@ -1,15 +1,16 @@
 # Quiz 1
 **Chapter 2, 3, 5**
+
 Bring Blue Book
 
 ## Growth Rates
-Big O: `f(n) <= g(n)`
-Little o: `f(n) < g(n)`
-Theta: `f(n) = g(n)`
-Omega: `f(n) >= g(n)`
+* Big O: `f(n) <= g(n)`
+* Little o: `f(n) < g(n)`
+* Theta: `f(n) = g(n)`
+* Omega: `f(n) >= g(n)`
 
-Bucket sort: `O(n)`
-Radix sort: `(P+N)` (p is passes.)
+* Bucket sort: `O(n)`
+* Radix sort: `(P+N)` (p is passes.)
 
 ## Stacks
 Big O of a stack: O(1)
