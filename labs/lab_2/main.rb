@@ -2,9 +2,12 @@ require 'pry'
 require 'mathn'
 
 def closest_prime(num)
-  begin
-    num =+ 1
-  end while num.prime?
+  num += 1
+  if num.prime?
+   return num
+  else
+    closest_prime(num)
+  end
 end
 
 
@@ -22,6 +25,22 @@ def time_method(method=nil, *args)
   return elapsed
 end
 
+def generate_random_strings(num)
+  strings = []
+  alphabet = (65..90)
+
+  num.times do
+    string = ""
+    5.times do
+      string << Random.rand(alphabet).to_s
+    end
+    strings << string
+  end
+  strings
+end
+
+
+
 def generate_ssn(num)
   social_set = Set.new
   loop do
@@ -29,5 +48,46 @@ def generate_ssn(num)
     social_set << Random.rand(111111111...999999999)
   end
 end
+
+class HashBrown
+  attr_accessor :hash, :data
+
+  def initialize(size: 0)
+    @hash = Array.new(size)
+    @table_size = @hash.size
+  end
+
+  def insert(num, step: 1, increment: 0, durations: 0)
+    entry_point = (num % @table_size + (increment ** step)) % @table_size
+
+    if @hash[entry_point].nil?
+      durations += 1
+      @hash[entry_point] = num
+    elsif @hash.compact.size == @table_size
+      raise "All slots have been taken"
+    else
+      durations += 1
+      increment += 1
+
+      durations = self.insert(num, step: step, increment: increment, durations: durations)
+    end
+    # binding.pry
+    return durations
+  end
+end
+
+
+def benchmark(strings_size: 0, hash_size: 0, increment: 0, step: 1)
+  runs = 0
+  foo = HashBrown.new(size: closest_prime(2 * hash_size))
+
+  strings = generate_random_strings strings_size
+
+  strings.each do |string|
+    runs += foo.insert(string.to_i, increment: increment, step: step)
+  end
+  puts runs
+end
+
 
 binding.pry
