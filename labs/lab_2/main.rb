@@ -1,12 +1,14 @@
 require 'pry'
 require 'mathn'
 
-def closest_prime(num)
-  num += 1
+def closest_prime(num, increment: 1)
+  num += increment
   if num.prime?
    return num
+  elsif num <= 1
+    raise "Cannot find prime numbers less than 2"
   else
-    closest_prime(num)
+    closest_prime(num, increment: increment)
   end
 end
 
@@ -40,15 +42,6 @@ def generate_random_strings(num)
 end
 
 
-
-def generate_ssn(num)
-  social_set = Set.new
-  loop do
-    return social_set.to_a if social_set.size == num
-    social_set << Random.rand(111111111...999999999)
-  end
-end
-
 class HashBrown
   attr_accessor :hash, :data
 
@@ -57,8 +50,13 @@ class HashBrown
     @table_size = @hash.size
   end
 
-  def insert(num, step: 1, increment: 0, durations: 0)
-    entry_point = (num % @table_size + (increment ** step)) % @table_size
+  def insert(num, step: 1, increment: 0, durations: 0, type: :single)
+    if type == :single
+      entry_point = (num % @table_size + (increment ** step)) % @table_size
+    elsif type == :double
+      r = closest_prime(@table_size, increment: -1)
+      entry_point = (num % @table_size + (increment * (r - num % r))) % @table_size
+    end
 
     if @hash[entry_point].nil?
       durations += 1
@@ -77,7 +75,7 @@ class HashBrown
 end
 
 
-def benchmark(strings_size: 0, hash_size: 0, increment: 0, step: 1)
+def benchmark(strings_size: 0, hash_size: 0, increment: 0, step: 1, type: :single)
   runs = 0
   foo = HashBrown.new(size: closest_prime(2 * hash_size))
 
