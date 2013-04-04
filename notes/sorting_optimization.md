@@ -102,6 +102,8 @@ We start by picking the median as a pivot. We split the data between what is gre
 We still use insertion sort at our arbitrary split point despite it's poor growth (N^2) because the data is small. The differences are inconsiquential.
 Quick sort is the fastest sort but it should not be used for everything. Hundreds of thousands of records would be appropriate. It's possible that quick sort can be exploited.
 
+Sort time is proportial to `N^2`.
+
 ## Picking the median pivot
 We can't know the median without having the list sorted already, so what do we do?
 Just pick the middle number from three random numbers that are sorted. 3 is a decent amount for most purposes.
@@ -110,4 +112,34 @@ Just pick the middle number from three random numbers that are sorted. 3 is a de
 * Just picking the middle number.
 * Taking the index instead of the value. You need to use the values at the locations. Locations: 0, N-1, N/2.
 * It's not the middle number, it's the median of the three.
+
+# Recursive Relationship
+How do you find the big O of a recursive relationship?
+1. `T(1) = 1`
+
+2. `T(N) = 2T(N/2) + N)`. As we expand this, we form a tree.
+We need an equation for the last level. Let's replace N with N/2.
+
+3. `T(N/2) = 2T(N/2/2) + N/2`
+
+4. `T(N) = 4T(N/4) + 2N`. This equation relates the top level to the bottom level.
+This still isn't good enough. We can see that `2N` shows that it is taking longer to put back together.
+
+5. `T(N) = k(T)(N/k) + k/2 * N`. This is similar to the mathematical induction we did in Discrete Math.
+
+6. `T(N) = 8T(N/8) + 3N` == **NOT TRUE**.
+
+What about this?
+7. `T(N) = 2^k * T(N/2 * k) + k * N`.
+
+k = Number of layers = logN
+
+`T(N) = 2^logN * T(N / 2^logN) + NlogN`
+
+`N + NlogN`. Our big O is (NlogN)
+
+### Protips
+* Don't use the telescope method.
+* This is method is much more difficult with quick sort.
+* What to do for log of any base? k = log_b((b - 1)N + 1)
 
