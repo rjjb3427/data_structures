@@ -80,7 +80,8 @@ If we took N items and separated them into `N/2`, we'd get:
 
 `N^2 > (N^2)/2 + f(N)`
 
-But does that save any time? What if we had `R` many divisions? We can do this with `log2(N)` (How many times we can divide N).
+But does that save any time? What if we had `R` many divisions? We can do this with `log2(N)`
+(How many times we can divide N).
 
 `N^2 > (N^2)/R + Rf(N)`
 
@@ -95,3 +96,18 @@ log2(64) = 6
 * 4 groups of 16
 * 2 groups of 32
 * 1 group of 64
+
+# Quick Sort
+We start by picking the median as a pivot. We split the data between what is greater than or equal to P and less than P.
+We still use insertion sort at our arbitrary split point despite it's poor growth (N^2) because the data is small. The differences are inconsiquential.
+Quick sort is the fastest sort but it should not be used for everything. Hundreds of thousands of records would be appropriate. It's possible that quick sort can be exploited.
+
+## Picking the median pivot
+We can't know the median without having the list sorted already, so what do we do?
+Just pick the middle number from three random numbers that are sorted. 3 is a decent amount for most purposes.
+
+### How to mess up on a test
+* Just picking the middle number.
+* Taking the index instead of the value. You need to use the values at the locations. Locations: 0, N-1, N/2.
+* It's not the middle number, it's the median of the three.
+
