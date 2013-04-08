@@ -130,9 +130,7 @@ This still isn't good enough. We can see that `2N` shows that it is taking longe
 
 6. `T(N) = 8T(N/8) + 3N` == **NOT TRUE**.
 
-What about this?
-
-7. `T(N) = 2^k * T(N/2 * k) + k * N`.
+7. What about this? `T(N) = 2^k * T(N/2 * k) + k * N`.
 
 k = Number of layers = logN
 
