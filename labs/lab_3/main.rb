@@ -19,12 +19,26 @@ class Printer
     @id = @@id += 1
     @status = status
     @repair_time = 0
+    @breakages = 0
   end
   attr_accessor :status, :id, :repair_time, :job
 
   def pretty_status
     health = status == :broken ? ": #{@repair_time} ticks left." : ""
     "Printer #{@id} is #{@status}#{health}"
+  end
+
+  def status_report
+    "Printer #{@id} finished #{@status}. The printer broke #{@breakages} time(s)."
+  end
+
+  def repair
+    if @repair_time == 0
+      @status = :idle
+      @breakages += 1
+    else
+      @repair_time -= 1
+    end
   end
 end
 
@@ -41,11 +55,11 @@ def simulate_printers
   printers = []
   5.times { |i| printers << Printer.new }
 
+  # It's like real life printers.
   @day_ticks.times do |i|
     printers.each do |printer|
       if printer.status == :broken
-        printer.repair_time == 0 ? printer.status = :idle : printer.repair_time -= 1
-
+        printer.repair
       elsif printer.status != :printing && @random_generator.rand(1..100) <= @printer_failure
         printer.status = :broken
         printer.repair_time = @repair_ticks
@@ -57,8 +71,13 @@ def simulate_printers
     if @random_generator.rand(1..100) <= @job_percentage
      puts "Job added"
     end
-    puts "- Tick #{id}"
-        binding.pry
+    puts "- Tick #{i}"
+        # binding.pry
+  end
+
+  # Time to wrap up the stats for the simulation
+  printers.each do |printer|
+    puts printer.status_report
   end
 end
 
