@@ -3,6 +3,7 @@ GEM
   specs:
     algorithms (0.6.1)
     coderay (1.0.9)
+    colorize (0.5.8)
     method_source (0.8.1)
     pry (1.0.0.pre1)
       coderay (~> 1.0.5)
@@ -15,4 +16,5 @@ PLATFORMS
 
 DEPENDENCIES
   algorithms
+  colorize
   pry (~> 1.0.0.pre1)
