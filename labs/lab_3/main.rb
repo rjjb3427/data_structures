@@ -1,17 +1,14 @@
 require 'pry'
 require 'algorithms'
 require 'colorize'
-@printer_num = 5
 
-# Time units
-@day_ticks = 200
 # @day_ticks = 1600
 @repair_ticks = 12
 @print_ticks = 5
 
-@printer_failure = 6
+@printer_failure = 0.06
 # Chances a job will be added.
-@job_percentage = 62
+@job_percentage = 0.62
 
 # Global for the sake of brevity.
 $random_generator = Random.new
@@ -63,7 +60,7 @@ class Printer
   end
 
   def status_report
-    "Printer #{@id} with the status '#{@status}'. The printer completed #{@completed_jobs} job(s) and broke #{@breakages} time(s)."
+    "Printer ##{@id} finished with the status '#{@status}'. The printer completed #{@completed_jobs} job(s) and broke #{@breakages} time(s)."
   end
 
   def repair
@@ -103,14 +100,14 @@ class Job
   end
 end
 
-def simulate_printers
+def simulate_printers(num: 5, ticks: 200)
   queue = Containers::PriorityQueue.new
 
   printers = []
-  5.times { |i| printers << Printer.new }
+  num.times { |i| printers << Printer.new }
 
   # It's like real life printers.
-  @day_ticks.times do |i|
+  ticks.times do |i|
     # Printer status.
     printers.each do |printer|
       case printer.status
@@ -118,7 +115,7 @@ def simulate_printers
         printer.repair
 
       when :idle
-        if $random_generator.rand(1..100) <= @printer_failure
+        if $random_generator.rand <= @printer_failure
           printer.status = :broken
           printer.busy_ticks = @repair_ticks
 
@@ -139,7 +136,7 @@ def simulate_printers
 
     # Job creation.
     job_status = ""
-    if $random_generator.rand(1..100) <= @job_percentage
+    if $random_generator.rand <= @job_percentage
      new_job = Job.new
      queue.push(new_job, new_job.priority)
 
@@ -157,8 +154,16 @@ def simulate_printers
     puts printer.status_report
   end
 
-  puts "#{Job.count} job(s) created.".red
+  puts "#{Job.count} job(s) created. #{queue.size} job(s) left on the queue.".red
 end
 
-simulate_printers
+puts "Welcome to e-printer simulator."
+print "How many printers do you desire? "
+printer_num = gets.chomp.to_i
+
+print "How many simulation ticks? "
+ticks = gets.chomp.to_i
+
+simulate_printers(num: printer_num, ticks: ticks)
+
 
