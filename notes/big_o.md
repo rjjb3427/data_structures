@@ -96,3 +96,6 @@ o (Little O): o means <
 ## Final notes
 Knowing an algorithm's Big-O is not enough information for you to make a choice as to which algorithm you want for your application. Assume all other factors are equal.
 You need to know what the operating point (range of N) is before you can decide.
+
+## Misc
+Stacks and queues are O(1) because they are already sorted.
