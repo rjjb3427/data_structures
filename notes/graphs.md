@@ -19,4 +19,6 @@ You can read more about this on page 343.
 
 ### Dijkstra's algorithm
 Basically, you try and find the "greediest" path.
+Greedy Algorithms picks a vertex over another if the path is shorter.
+It doesn't matter if it's wrong; it help you but not hurt you. However, negative edges will return a wrong path.
 O ElogV using a heap
