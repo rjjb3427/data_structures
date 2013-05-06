@@ -76,10 +76,37 @@ RISC tries to move the architecture/implementation boundry down, closer to the h
 One of the most important concerns in a program is the order in which the code is executed; this is known as **control flow**.
 The ordering mechanisms can be divided into 8 categories: **Sequencing**, **Selection**, **Iteration**, **Procedural Abstraction**, **Recursion**, **Concurrency**, **Exception Handling and Speculation**, and **Non-determinacy**.
 
+Each category of control flow has a different importance among various classes of programming.
+For instance, sequencing is central to imperative languages (Von Neumann and Object oriented). However, sequencing has almost no value in functional languages, which emphasize evaluation of expression. This also means that statements are deemphasized or eliminated all together.
 
 ## Miscellaneous
+Functional languages use recursion heavily and imperative languages use interation heavily.
+Logic languages deemphasize control flow entirely.
+
+A language may specify that functions employ **prefix**, **infix** or **postfix** notations.
+Most imperative languages use infix for binary operators and prefix for unary operators.
+Lisp uses prefix notation for all functions. Some languages allow you to create your own prefix notations such as ML.
+
+Precedence rules work without parentheses, however the inclusion will help.
+
+
 **Subroutines** are a **control abstraction** that programmers use to modulize (hide) code behind an interface.
 **Classes** are a **data abstraction** that programmers use to hide a data representation behind a simple set of operations.
+
+**Assignment** is the means of changing variable values. A side effect is some permanent state change caused by execution of a function.
+Assignment statements are a perfect example of a side effect since they change the value of a variable.
+Side effects are fundamental to the Von Neumann model of computing.
+Imperative programming languages represent a model of computing that is called the **extensional approach**.
+The extensional approach looks at procedures of computation as a *black box* that extends the set of inputs to an output.
+
+In this outlook, a programmer is just interested in finishing a procedure to the correct result.
+The **intensional** approach is also used, meaning that the setup of the procedure is the concern.
+Intensional looks inside that blackbox and check the procedure line by line to minimize the costs.
+
+Some necessary features for functional programming are **first class and high-order functions**, **serious polymorphism**, **powerful list facilities**, **structured function returns**, and **garbage collection**.
+
+A **process** or **thread** is a potentially executable context.
+The Von Neumann model of computing works with a single thread of control, whereas parallel programs have more than one thread of control.
 
 
 
