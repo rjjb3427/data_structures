@@ -12,10 +12,12 @@ A graph is known as **Sparce** if it has less edges than is possible.
 There are two ways: one that sucks, another that works well.
 Two dimensional arrays could work, but they waste a lot of memory. The big O would be V^2.
 What about an **adjaceny** list? The big O would be V+E. If E is maximum, then E = (V)(V-1).
-However, if all the possible edges are taken in the adjacency list, the big O would be V^2
+However, if all the possible edges are taken in the adjacency list, the big O (number of possible edges) would be V^2
 
 ## Topographical Sort
 You can read more about this on page 343.
+You cannot topographically sort a cyclic graph because it will never end.
+If all paths are present, the size is V factorial (V!).
 
 ### Dijkstra's algorithm
 Basically, you try and find the "greediest" path.
